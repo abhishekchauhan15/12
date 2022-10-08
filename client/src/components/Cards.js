@@ -14,9 +14,10 @@ import ShareIcon from "@mui/icons-material/Share";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export default function Cards() {
+const Cards = ({ title }) => {
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    // sx={{ maxWidth: 360 }}
+    <Card sx={{ maxWidth: 360 }}>
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -34,6 +35,7 @@ export default function Cards() {
 
       <CardContent>
         <Typography paragraph>
+          {title}
           Heat 1/2 cup of the broth in a pot until simmering, add saffron and
           set aside for 10 minutes.
         </Typography>
@@ -53,4 +55,6 @@ export default function Cards() {
       </CardActions>
     </Card>
   );
-}
+};
+
+export default Cards;
