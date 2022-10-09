@@ -6,7 +6,9 @@ const CardInfo = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
-      const result = await fetch("/data");
+      const result = await fetch(
+        "https://madscientist-production.up.railway.app/data"
+      );
       const data = await result.json();
       setData(data);
     };
@@ -17,7 +19,7 @@ const CardInfo = () => {
     <div
       style={{
         display: "flex",
-        marginLeft: "100px"
+        marginLeft: "100px",
       }}
     >
       {data.map((item) => {
