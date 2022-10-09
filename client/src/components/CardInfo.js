@@ -17,13 +17,20 @@ const CardInfo = () => {
     <div
       style={{
         display: "flex",
-        margin: "60px",
-        height: "200%",
+        marginLeft: "100px"
       }}
     >
       {data.map((item) => {
         return (
           <div key={item.id}>
+            <Cards
+              name={item.name}
+              position={item.position}
+              text={item.text}
+              description={item.description}
+              likes={item.likes}
+              views={item.views}
+            />
             <Cards
               name={item.name}
               position={item.position}

@@ -26,9 +26,17 @@ const Cards = ({ name, position, text, description, likes, views }) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClick = () => {
+  const handleClick = async () => {
     setAnchorEl(null);
     setOpen(true);
+
+    const res = await fetch("/follow", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      // body: JSON.stringify(id)
+    });
   };
 
   const handleClose = (event, reason) => {
@@ -39,7 +47,7 @@ const Cards = ({ name, position, text, description, likes, views }) => {
   };
 
   return (
-    <Card sx={{ maxWidth: 360, borderRadius: "10px", margin: "20px" }}>
+    <Card sx={{ maxWidth:380, minHeight: 300 , borderRadius: "10px", margin: "20px", marginTop:"-4px" }}>
       <CardHeader
         style={{
           display: "flex",
@@ -63,7 +71,7 @@ const Cards = ({ name, position, text, description, likes, views }) => {
             <Dropdown anchorEl={anchorEl} handleClick={handleClick} />
           </IconButton>
         }
-        title={["Amit", <VerifiedIcon style={{ margin: "0 0 0 32" }} />]}
+        title={["amit", <VerifiedIcon style={{ margin: "0 0 0 32" }} />]}
         subheader={position}
       />
 
@@ -87,7 +95,6 @@ const Cards = ({ name, position, text, description, likes, views }) => {
         startIcon={<ExitToAppIcon />}
         style={{ marginLeft: "40px" }}
       ></Button>
-
       <Stack spacing={2} sx={{ width: "100%" }}>
         <Snackbar open={open} autoHideDuration={4000} onClose={handleClose}>
           <Alert
