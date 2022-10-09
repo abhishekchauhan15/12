@@ -26,7 +26,7 @@ const Cards = ({ name, position, text, description, likes, views }) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClick = async () => {
+  const handleClick = async (position) => {
     setAnchorEl(null);
     setOpen(true);
 
@@ -35,8 +35,10 @@ const Cards = ({ name, position, text, description, likes, views }) => {
       headers: {
         "Content-Type": "application/json",
       },
-      // body: JSON.stringify(id)
+      body: JSON.stringify(position),
     });
+
+    const data = res.json();
   };
 
   const handleClose = (event, reason) => {
@@ -47,7 +49,15 @@ const Cards = ({ name, position, text, description, likes, views }) => {
   };
 
   return (
-    <Card sx={{ maxWidth:380, minHeight: 300 , borderRadius: "10px", margin: "20px", marginTop:"-4px" }}>
+    <Card
+      sx={{
+        maxWidth: 380,
+        minHeight: 300,
+        borderRadius: "10px",
+        margin: "20px",
+        marginTop: "-4px",
+      }}
+    >
       <CardHeader
         style={{
           display: "flex",

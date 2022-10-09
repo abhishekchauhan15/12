@@ -2,6 +2,11 @@ const express = require("express");
 const router = express.Router();
 const CardInfo = require("../models/CardSchema");
 
+const {report}= require("../controllers/report");
+const {save}= require("../controllers/save");
+const {block}= require("../controllers/block");
+const {follow}= require("../controllers/follow");
+
 router.get("/data", async (req, res) => {
   try {
     const cardData = await CardInfo.find();
@@ -12,7 +17,6 @@ router.get("/data", async (req, res) => {
 });
 
 router.post("/register", async (req, res) => {
-  //object destructrion
   const {
     name,
     position,
@@ -54,7 +58,7 @@ router.post("/register", async (req, res) => {
     });
     const createData = await newData.save();
 
-    res.status(201).send(createData);
+    res.status(200).send(createData);
   } catch (err) {
     console.log(err);
     res.status(500).json({ error: err });
@@ -62,6 +66,9 @@ router.post("/register", async (req, res) => {
 });
 
 
-
+router.post("/report", report);
+router.post("/save", save);
+router.post("/block", block);
+router.post("/follow", follow);
 
 module.exports = router;
