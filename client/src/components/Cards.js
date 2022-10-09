@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
@@ -18,32 +18,38 @@ import Snackbar from "@mui/material/Snackbar";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import VerifiedIcon from "@mui/icons-material/Verified";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import DownloadForOfflineIcon from '@mui/icons-material/DownloadForOffline';
 
 const Cards = ({ title }) => {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [open, setOpen] = React.useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [open, setOpen] = useState(false);
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
   const handleClick = () => {
+    setAnchorEl(null);
     setOpen(true);
   };
 
-  const handleclose = (event, reason) => {
+  const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
     }
-
     setOpen(false);
   };
+
+
+
   return (
     <Card sx={{ maxWidth: 360, borderRadius: "10px" }}>
       <CardHeader
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
             R
@@ -72,39 +78,19 @@ const Cards = ({ title }) => {
                 horizontal: "right",
               }}
               open={Boolean(anchorEl)}
-              onClose={handleClose}
             >
-              <MenuItem onClick={handleClose}>
-                <AddCardIcon /> Save
-              </MenuItem>
-              <MenuItem onClick={handleClose}>
+              <MenuItem>
                 {" "}
                 <Stack sx={{ width: "100%" }}>
                   <Button variant="text" onClick={handleClick}>
-                    <AddCardIcon /> Follow
-                  </Button>
-                </Stack>
-              </MenuItem>
-              <MenuItem onClick={handleClose}>
-                {" "}
-                <Stack sx={{ width: "100%" }}>
-                  <Button variant="text" onClick={handleClick}>
-                    <AddCardIcon /> Block
-                  </Button>
-                </Stack>
-              </MenuItem>
-              <MenuItem onClick={handleClose}>
-                {" "}
-                <Stack sx={{ width: "100%" }}>
-                  <Button variant="text" onClick={handleClick}>
-                    <AddCardIcon /> Report
+                    <DownloadForOfflineIcon /> Save
                   </Button>
                 </Stack>
               </MenuItem>
             </Menu>
           </IconButton>
         }
-        title="Shrimp and Chorizo Paella"
+        title={["Amit", <VerifiedIcon style={{ margin: "0 0 0 32" }} />]}
         subheader="ML Engineer "
       />
 
@@ -112,7 +98,7 @@ const Cards = ({ title }) => {
         <Typography
           paragraph
           backgroundColor="#D3CEDF"
-          style={{ padding: "4px" }}
+          style={{ padding: "6px", borderRadius: "8px" }}
         >
           Heat 1/2 cup of the broth in a pot until simmering, add saffron and
           set aside for 10 minutes.
@@ -125,12 +111,11 @@ const Cards = ({ title }) => {
       </CardContent>
       <Button startIcon={<ThumbUpIcon />}>Like 12K</Button>
       <Button startIcon={<RemoveRedEyeIcon />}>Views 2K</Button>
-
       <Stack spacing={2} sx={{ width: "100%" }}>
         <Button variant="outlined" onClick={handleClick}></Button>
-        <Snackbar open={open} autoHideDuration={4000} onClose={handleclose}>
+        <Snackbar open={open} autoHideDuration={4000} onClose={handleClose}>
           <Alert
-            onClose={handleclose}
+            onClose={handleClose}
             severity="success"
             sx={{ width: "100%" }}
           >
