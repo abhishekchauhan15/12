@@ -6,24 +6,32 @@ const CardInfo = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
-      const result = await fetch("https://jsonplaceholder.typicode.com/users");
+      const result = await fetch("/data");
       const data = await result.json();
       setData(data);
     };
     fetchData();
   }, []);
+  console.log(data);
   return (
     <div
       style={{
         display: "flex",
         margin: "60px",
-        height:"200%"
+        height: "200%",
       }}
     >
       {data.map((item) => {
         return (
           <div key={item.id}>
-            <Cards title={item.name} />
+            <Cards
+              name={item.name}
+              position={item.position}
+              text={item.text}
+              description={item.description}
+              likes={item.likes}
+              views={item.views}
+            />
           </div>
         );
       })}

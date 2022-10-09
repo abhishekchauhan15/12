@@ -22,8 +22,24 @@ const cardSchema = new Schema({
   views: {
     type: Number,
   },
+  isSaved: {
+    type: Boolean,
+    default: false,
+  },
+  isFollowed: {
+    type: Boolean,
+    default: false,
+  },
+  isReport: {
+    type: Boolean,
+    default: false,
+  },
+  isBlocked: {
+    type: Boolean,
+    default: false,
+  },
 });
 
-const cardinfo = mongoose.model("CardInfo", cardSchema);
+const CardInfo = mongoose.model("CardInfo", cardSchema);
 
-module.exports = cardinfo;
+module.exports = CardInfo;

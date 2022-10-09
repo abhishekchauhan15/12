@@ -8,9 +8,6 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import { red } from "@mui/material/colors";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import MenuItem from "@mui/material/MenuItem";
-import Menu from "@mui/material/Menu";
-import AddCardIcon from "@mui/icons-material/AddCard";
 import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
@@ -18,9 +15,10 @@ import Snackbar from "@mui/material/Snackbar";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import VerifiedIcon from "@mui/icons-material/Verified";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
-import DownloadForOfflineIcon from '@mui/icons-material/DownloadForOffline';
+import Dropdown from "./Dropdown";
+import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 
-const Cards = ({ title }) => {
+const Cards = ({ name, position, text, description, likes, views }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);
 
@@ -40,10 +38,8 @@ const Cards = ({ title }) => {
     setOpen(false);
   };
 
-
-
   return (
-    <Card sx={{ maxWidth: 360, borderRadius: "10px" }}>
+    <Card sx={{ maxWidth: 360, borderRadius: "10px", margin: "20px" }}>
       <CardHeader
         style={{
           display: "flex",
@@ -64,62 +60,42 @@ const Cards = ({ title }) => {
               onClick={handleMenu}
               color="inherit"
             />
-
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorEl}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorEl)}
-            >
-              <MenuItem>
-                {" "}
-                <Stack sx={{ width: "100%" }}>
-                  <Button variant="text" onClick={handleClick}>
-                    <DownloadForOfflineIcon /> Save
-                  </Button>
-                </Stack>
-              </MenuItem>
-            </Menu>
+            <Dropdown anchorEl={anchorEl} handleClick={handleClick} />
           </IconButton>
         }
         title={["Amit", <VerifiedIcon style={{ margin: "0 0 0 32" }} />]}
-        subheader="ML Engineer "
+        subheader={position}
       />
 
       <CardContent>
         <Typography
           paragraph
           backgroundColor="#D3CEDF"
-          style={{ padding: "6px", borderRadius: "8px" }}
+          style={{ padding: "6px", borderRadius: "8px", marginTop: "-19px" }}
         >
-          Heat 1/2 cup of the broth in a pot until simmering, add saffron and
-          set aside for 10 minutes.
+          {text}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          This impressive paella is a perfect party dish and a fun meal to cook
-          together with your guests. Add 1 cup of frozen peas along with the
-          mussels, if you like.
+          {description}
         </Typography>
       </CardContent>
-      <Button startIcon={<ThumbUpIcon />}>Like 12K</Button>
-      <Button startIcon={<RemoveRedEyeIcon />}>Views 2K</Button>
+      <Button startIcon={<ThumbUpIcon />} style={{ marginLeft: "8px" }}>
+        Like {likes}K
+      </Button>
+      <Button startIcon={<RemoveRedEyeIcon />}>Views {views}K</Button>
+      <Button
+        startIcon={<ExitToAppIcon />}
+        style={{ marginLeft: "40px" }}
+      ></Button>
+
       <Stack spacing={2} sx={{ width: "100%" }}>
-        <Button variant="outlined" onClick={handleClick}></Button>
         <Snackbar open={open} autoHideDuration={4000} onClose={handleClose}>
           <Alert
             onClose={handleClose}
             severity="success"
             sx={{ width: "100%" }}
           >
-            This is a success message!
+            Done!
           </Alert>
         </Snackbar>
       </Stack>
