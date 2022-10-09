@@ -1,3 +1,4 @@
+import { height } from "@mui/system";
 import React, { useState, useEffect } from "react";
 import Cards from "./Cards";
 
@@ -12,7 +13,13 @@ const CardInfo = () => {
     fetchData();
   }, []);
   return (
-    <div>
+    <div
+      style={{
+        display: "flex",
+        margin: "60px",
+        height:"200%"
+      }}
+    >
       {data.map((item) => {
         return (
           <div key={item.id}>
