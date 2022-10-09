@@ -3,24 +3,21 @@ import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardContent from "@mui/material/CardContent";
-import CardActions from "@mui/material/CardActions";
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import { red } from "@mui/material/colors";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import ShareIcon from "@mui/icons-material/Share";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import AddCardIcon from "@mui/icons-material/AddCard";
 import Alert from "@mui/material/Alert";
-
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Snackbar from "@mui/material/Snackbar";
-import MuiAlert from "@mui/material/Alert";
+import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+import VerifiedIcon from "@mui/icons-material/Verified";
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 
 const Cards = ({ title }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -45,7 +42,7 @@ const Cards = ({ title }) => {
     setOpen(false);
   };
   return (
-    <Card sx={{ maxWidth: 360 }}>
+    <Card sx={{ maxWidth: 360, borderRadius: "10px" }}>
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -61,6 +58,7 @@ const Cards = ({ title }) => {
               onClick={handleMenu}
               color="inherit"
             />
+
             <Menu
               id="menu-appbar"
               anchorEl={anchorEl}
@@ -109,8 +107,13 @@ const Cards = ({ title }) => {
         title="Shrimp and Chorizo Paella"
         subheader="ML Engineer "
       />
+
       <CardContent>
-        <Typography paragraph backgroundColor="#D3CEDF" style={{padding:"4px"}}>
+        <Typography
+          paragraph
+          backgroundColor="#D3CEDF"
+          style={{ padding: "4px" }}
+        >
           Heat 1/2 cup of the broth in a pot until simmering, add saffron and
           set aside for 10 minutes.
         </Typography>
@@ -120,14 +123,9 @@ const Cards = ({ title }) => {
           mussels, if you like.
         </Typography>
       </CardContent>
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
-      </CardActions>
+      <Button startIcon={<ThumbUpIcon />}>Like 12K</Button>
+      <Button startIcon={<RemoveRedEyeIcon />}>Views 2K</Button>
+
       <Stack spacing={2} sx={{ width: "100%" }}>
         <Button variant="outlined" onClick={handleClick}></Button>
         <Snackbar open={open} autoHideDuration={4000} onClose={handleclose}>
